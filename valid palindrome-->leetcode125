@@ -1,0 +1,53 @@
+Problem:
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+
+Example 1:
+
+Input: "A man, a plan, a canal: Panama"
+Output: true
+Example 2:
+
+Input: "race a car"
+Output: false
+ 
+
+Constraints:
+
+s consists only of printable ASCII characters.
+
+solution:
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    var alphabets=/([0-9A-Za-z]+)/g;
+    var matched=s.match(alphabets);   
+    s=s.replace(/[^a-zA-Z0-9]/g,"");
+    if(s.length<=1){
+        return true;
+    }
+    var finalstr=matched.toString().split(",").join("");
+    if(palindrome(finalstr)){
+        return true;
+    }else{
+        return false;
+    }
+     
+}
+
+function palindrome(string){
+       var l=0;
+        var r=string.length-1;
+        while(l<r){
+            if(!(string[l].toLowerCase()==string[r].toLowerCase())){
+                return false
+            }else{
+                l++;r--;
+            }
+        }
+        return true;
+}
+
