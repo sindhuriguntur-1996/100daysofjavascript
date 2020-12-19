@@ -1,0 +1,45 @@
+Problem:
+Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+
+Example 1:
+Input: "aba"
+Output: True
+Example 2:
+Input: "abca"
+Output: True
+Explanation: You could delete the character 'c'.
+Note:
+The string will only contain lowercase characters a-z. The maximum length of the string is 50000
+
+solution:
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var validPalindrome = function(s) {
+    var start=0,end=s.length-1;
+    while(start<end){
+   if(s[start] !== s[end]) {
+      return palindrome(s.slice(start, end))|| palindrome(s.slice(start + 1, end + 1));;
+        
+    }
+
+    start++;
+    end--;
+  }
+return true;
+}
+
+function palindrome(string){
+       var l=0;
+        var r=string.length-1;
+        while(l<r){
+            if(!(string[l].toLowerCase()==string[r].toLowerCase())){
+                return false
+            }else{
+                l++;r--;
+            }
+        }
+        return true;
+}
+
