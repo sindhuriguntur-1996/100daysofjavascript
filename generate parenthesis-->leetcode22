@@ -1,0 +1,40 @@
+Problem:
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+ 
+
+Example 1:
+
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+
+Input: n = 1
+Output: ["()"]
+
+solution:
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+  var res=[];
+    function backtrack(bracket,openbracket,closebracket){
+        if(openbracket>closebracket){
+            return;
+        }
+        if(openbracket===0 && closebracket===0 ){
+            res.push(bracket);
+            return
+        }
+        if(openbracket>0){
+          backtrack(`${bracket}(`,openbracket-1,closebracket)
+        }
+        if(closebracket>0){
+            backtrack(`${bracket})`,openbracket,closebracket-1);
+        }  
+          
+    }
+    backtrack('',n,n);
+    return res;
+};
