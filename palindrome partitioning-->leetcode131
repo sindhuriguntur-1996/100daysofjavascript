@@ -1,0 +1,53 @@
+Problem:
+Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
+
+A palindrome string is a string that reads the same backward as forward.
+
+ 
+
+Example 1:
+
+Input: s = "aab"
+Output: [["a","a","b"],["aa","b"]]
+Example 2:
+
+Input: s = "a"
+Output: [["a"]]
+ 
+ 
+ 
+ solution:
+ /**
+ * @param {string} s
+ * @return {string[][]}
+ */
+var partition = function(s) {
+  const result = [];
+    function combperm(arr,str){
+        if(!str.length) result.push(arr);
+        for(let i=1;i<=str.length;i++){
+            var substr=str.slice(0,i);
+            if(palindrome(substr)){
+                //console.log("sstr",substr);
+                //console.log([...arr,substr],str.slice(i))
+                combperm([...arr,substr],str.slice(i))
+            }
+        }
+    }
+    combperm([],s);
+    return result
+}
+
+
+   function palindrome(string){
+       var l=0;
+        var r=string.length-1;
+        while(l<r){
+            if(!(string[l].toLowerCase()==string[r].toLowerCase())){
+                return false
+            }else{
+                l++;r--;
+            }
+        }
+        return true;
+}
